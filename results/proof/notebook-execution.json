@@ -1,0 +1,22 @@
+[
+  {
+    "notebook": "01_bell_chsh.ipynb",
+    "clean_kernel": true,
+    "executed_code_cells": 2
+  },
+  {
+    "notebook": "02_damping_sweep.ipynb",
+    "clean_kernel": true,
+    "executed_code_cells": 2
+  },
+  {
+    "notebook": "03_qaoa_maxcut.ipynb",
+    "clean_kernel": true,
+    "executed_code_cells": 2
+  },
+  {
+    "notebook": "04_zne_landscape.ipynb",
+    "clean_kernel": true,
+    "executed_code_cells": 2
+  }
+]

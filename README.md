@@ -25,7 +25,16 @@ quantum-experiments zne --out results/zne
 
 Each command writes `report.json`, `data.csv`, `plot.svg`, `plot.png` and `output-hashes.json`. Circuit diagrams accompany the discrete-circuit studies; ZNE stores each folded circuit and its cost in the report. Open a notebook to run its imported study and display the corresponding plot. Notebook support uses `nbclient`, `nbformat` and `ipykernel` from [requirements.in](requirements.in).
 
-For exact reproducibility, use the **resolved hash lock** produced by the [simulation proof workflow](.github/workflows/ci.yml), not a fresh unconstrained resolution. [Reproducibility](docs/reproducibility.md) documents the wheel bootstrap and artifact layout. Generated results are produced by execution rather than stored illustrative upstream output; this source checkout does not include a completed run.
+For exact reproducibility, use the **resolved hash lock** produced by the [simulation proof workflow](.github/workflows/ci.yml), not a fresh unconstrained resolution. [Reproducibility](docs/reproducibility.md) documents the wheel bootstrap and artifact layout. The [published results](results/) and executed notebooks come from [simulation proof run 38178146290](https://github.com/dave-137/quantum-experiments/actions/runs/38178146290), executed at source revision `fd199ddfb1a71a81c162793d665e9e38e13b26f0`. The [binding](results/proof/binding.json) and [resolved environment](results/proof/distribution-provenance.json) preserve that run independently of the later output-publication commit.
+
+## Recorded results
+
+| Study | Result in the recorded run |
+|---|---|
+| Bell/CHSH | 3447 wins / 4096 trials = 0.84155, compared with classical 0.75 and quantum 0.85355 |
+| Amplitude damping | Measured P(1): 1.0000, 0.59863, 0.49414, 0.0000 for p = 0, 0.4, 0.5, 1 |
+| Max-Cut QAOA | Best sampled cut 7 equals the exact optimum; mean objective 5.72656. The optimizer reached its 50-iteration cap, not convergence |
+| ZNE landscape | Mean absolute error fell from 0.14696 to 0.03801 over 50 angles; 2 points worsened and none extrapolated outside [-1, 1] |
 
 ## How the code fits together
 

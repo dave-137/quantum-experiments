@@ -1,0 +1,12 @@
+{
+  "run_id": 38178146290,
+  "source_revision": "fd199ddfb1a71a81c162793d665e9e38e13b26f0",
+  "tests": 12,
+  "scripted_studies": 4,
+  "clean_kernel_notebooks": 4,
+  "consumer": "installed wheel, outside source checkout",
+  "plot_review": "8 actual PNGs inspected: distinct study content, axes/units/legends present, no cutoff/overflow; notebook and script arrays agree",
+  "aggregate_job_seconds": 172,
+  "minute_rounded_total": 4,
+  "mode": "simulation"
+}

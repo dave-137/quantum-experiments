@@ -1,0 +1,1 @@
+pip 26.2.1 from /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/pip (python 3.12)

@@ -1,0 +1,1 @@
+q: ───M('initial_state')───X───M('after_not_gate')───

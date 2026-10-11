@@ -1,0 +1,15 @@
+{
+  "distribution": "0.1.0",
+  "imported_studies": 4,
+  "outside_checkout_cli": true,
+  "trial_count": 75,
+  "stdout_summary": {
+    "study": "bell",
+    "mode": "simulation",
+    "summary": {
+      "wins": 61,
+      "trials": 75,
+      "win_probability": 0.8133333333333334
+    }
+  }
+}

@@ -1,0 +1,5 @@
+p,initial_zero,initial_one,after_zero,after_one,after_one_probability,ideal_channel_probability
+0,1024,0,0,1024,1.0,1.0
+0.4,1024,0,411,613,0.5986328125,0.6000000238418579
+0.5,1024,0,518,506,0.494140625,0.5
+1,1024,0,1024,0,0.0,0.0

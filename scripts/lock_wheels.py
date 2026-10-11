@@ -10,7 +10,7 @@ def main():
     records = []
     for wheel in sorted(Path("wheelhouse").glob("*.whl")):
         with zipfile.ZipFile(wheel) as z:
-            metadata_paths = [n for n in z.namelist() if n.endswith(".dist-info/METADATA")]
+            metadata_paths = [n for n in z.namelist() if len(n.split("/")) == 2 and n.endswith(".dist-info/METADATA")]
             if len(metadata_paths) != 1:
                 raise ValueError("Expected exactly one distribution metadata record")
             metadata = email.message_from_bytes(z.read(metadata_paths[0]))

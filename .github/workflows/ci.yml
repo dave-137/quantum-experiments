@@ -1,0 +1,72 @@
+name: Simulation proof
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      MPLBACKEND: Agg
+      PYTHONHASHSEED: '0'
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Resolve published wheels and produce hash lock
+        run: |
+          mkdir -p proof
+          date -u +%s > proof/start-epoch.txt
+          python -m pip --isolated download --index-url https://pypi.org/simple --only-binary=:all: --dest wheelhouse -r requirements.in
+          python scripts/lock_wheels.py
+          python -m pip --isolated install --no-index --find-links wheelhouse --require-hashes -r requirements.lock
+          python -m pip --version > proof/pip-version.txt
+          python -m pip check
+          python scripts/bind_proof.py
+      - name: Build and install the candidate wheel
+        run: |
+          python -m pip --isolated wheel --no-deps --no-build-isolation . --wheel-dir dist
+          python -m pip --isolated install --no-deps --no-index dist/*.whl
+      - name: Validate numerical source invariants
+        run: python -m pytest -q --junitxml=proof/pytest.xml
+      - name: Generate full simulation reports
+        run: |
+          quantum-experiments bell --out results/bell --binding proof/binding.json
+          quantum-experiments damping --out results/damping --binding proof/binding.json
+          quantum-experiments qaoa --out results/qaoa --binding proof/binding.json
+          quantum-experiments zne --out results/zne --binding proof/binding.json
+      - name: Clean notebook and installed-consumer proof
+        run: |
+          python scripts/execute_notebooks.py
+          python scripts/consumer_smoke.py
+          python scripts/validate_reports.py
+      - name: Record elapsed runner time
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, time
+          from pathlib import Path
+          start = Path('proof/start-epoch.txt')
+          seconds = int(time.time()) - int(start.read_text()) if start.exists() else None
+          Path('proof').mkdir(exist_ok=True)
+          Path('proof/resource-usage.json').write_text(json.dumps({'elapsed_proof_phase_seconds': seconds, 'ceiling_minutes': 15}) + '\n')
+          PY
+      - name: Export locked environment and scientific proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: simulation-proof
+          path: |
+            proof/
+            results/
+            requirements.lock
+            dist/
+          retention-days: 14
+          if-no-files-found: error

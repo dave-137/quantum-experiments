@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=75,<83"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quantum-experiments"
+version = "0.1.0"
+description = "Personal quantum-computing experiments with Cirq and Mitiq"
+requires-python = ">=3.12,<3.13"
+license = {text = "GPL-3.0-only"}
+authors = [{name = "Dave"}]
+dependencies = [
+  "cirq-core>=1.6,<1.7", "mitiq>=1.0,<1.2", "numpy>=2,<2.3",
+  "scipy>=1.10.1,<=1.17.1", "networkx>=3.4,<4", "matplotlib>=3.8,<4",
+]
+
+[project.scripts]
+quantum-experiments = "quantum_experiments.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools]
+license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "licenses/Apache-2.0.txt"]

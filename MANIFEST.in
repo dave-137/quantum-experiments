@@ -1,0 +1,6 @@
+include LICENSE THIRD_PARTY_NOTICES.md requirements.in
+recursive-include licenses *.txt
+recursive-include docs *.md
+recursive-include notebooks *.ipynb
+recursive-include scripts *.py
+recursive-include tests *.py

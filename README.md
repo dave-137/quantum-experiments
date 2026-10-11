@@ -1,6 +1,6 @@
 # Quantum experiments
 
-Dave’s personal portfolio of reproducible quantum-computing experiments with **Cirq** and **Mitiq**. Four small studies connect an inspectable circuit to simulator measurements or expectation values, numerical comparisons, tables and plots. Everything runs in one Python environment without an account or hardware service.
+A portfolio of reproducible quantum-computing experiments with **Cirq** and **Mitiq**. Four studies explore entanglement, noise, optimization and error mitigation through circuits, simulation results, tables and plots. All four run in the same Python environment.
 
 | Study | Reader question | Comparison | Notebook |
 |---|---|---|---|

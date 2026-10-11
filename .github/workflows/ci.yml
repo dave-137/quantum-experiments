@@ -8,7 +8,7 @@ permissions:
 jobs:
   proof:
     runs-on: ubuntu-24.04
-    timeout-minutes: 14
+    timeout-minutes: 13
     env:
       MPLBACKEND: Agg
       PYTHONHASHSEED: '0'
